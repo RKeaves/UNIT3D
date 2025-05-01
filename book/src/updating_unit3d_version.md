@@ -1,6 +1,6 @@
 # Updating UNIT3D
 
-Update UNIT3D and its dependencies following the steps below.
+Update UNIT3D to the latest version by reviewing the release notes and following the steps below:
 
 ## 1. Create Backup
 
@@ -20,7 +20,7 @@ php artisan down
 
 > **Note:** Before running the update, ensure your environment meets the new release’s minimum requirements.
 
-1. **Fetch and apply updates**  
+1. **Proceed to update:**  
 - The updater will fetch the latest commits from the upstream repository and stage them for installation.
     
    ```bash
@@ -34,9 +34,9 @@ php artisan down
         > yes
     ````
 
-2. **Review and resolve conflicts**  
+2. **Accept upstream files**  
 
-- Pulls upstream commits and prompts for each file change; respond “yes” to overwrite your local copy.  
+- When prompted for each changed file, type yes to overwrite your local copy.  
 
     ````bash
         Update config/unit3d.php (yes/no) [yes]:
@@ -44,12 +44,7 @@ php artisan down
 
         git checkout origin/master -- config/unit3d.php
         [============================] (Done!)
-
-        Update resources/sass/components/_quick_search.scss (yes/no) [yes]:
-        > yes
     ````
-
-- After the update, review `~/tempBackup/updateLogs.txt` for conflicts. Any modifications will need to be re-implemented with the new code.  
 
 3. **Run new migrations**
    
@@ -57,6 +52,20 @@ php artisan down
         Run new migrations (php artisan migrate) (yes/no) [yes]:
         > yes
     ````
+
+4. **Install new packages**
+   
+    ````bash
+        Install new packages (composer install) (yes/no) [yes]:
+        > yes
+    ````    
+
+5. **Compile assets**
+   
+    ````bash
+        Compile assets (bun run build) (yes/no) [yes]:
+        > yes        
+    ````    
 
 ## 4. Resume Site Functionality
 
@@ -68,16 +77,6 @@ sudo systemctl restart php8.4-fpm && \
 sudo php artisan queue:restart && \
 sudo php artisan up
 ```
-> [!TIP]   
-> If running external Unit3d-Announce, restart the supervisor services.  
-
-```sh
-sudo supervisorctl reread && \
-sudo supervisorctl update && \
-sudo supervisorctl reload 
-```
----
-
 
 ## Troubleshooting Clean-up
 
@@ -85,37 +84,39 @@ Migration-related failures can occur during the update. It is important to revie
 
 The below list of commands to finish a complete update process:
 
-Finish any migrations not completed:  
-`sudo php artisan migrate`
+- Finish any migrations not completed:  
+    `sudo php artisan migrate`
 
-Reinstall dependencies:  
-`sudo -u www-data composer install --prefer-dist --no-dev -o`  
+- Reinstall dependencies:  
+    `sudo -u www-data composer install --prefer-dist --no-dev -o`  
 
-Clear caches:  
-```sh
-sudo php artisan cache:clear  && \
-sudo php artisan queue:clear  && \
-sudo php artisan auto:email-blacklist-update && \
-sudo php artisan auto:cache_random_media && \
-sudo php artisan set:all_cache  
-```
-Rebuild static assets:  
-`bun install && bun run build`  
+- Clear caches:  
 
-Restart the PHP-FPM service:  
-`sudo systemctl restart php8.4-fpm`
+    ```sh
+    sudo php artisan cache:clear  && \
+    sudo php artisan queue:clear  && \
+    sudo php artisan auto:email-blacklist-update && \
+    sudo php artisan auto:cache_random_media && \
+    sudo php artisan set:all_cache  
+    ```
 
-Restart the Laravel queues:  
-`sudo php artisan queue:restart`  
+- Rebuild static assets:  
+    `bun install && bun run build`  
 
-Bring the site live:  
-`sudo php artisan up`
+- Restart the PHP-FPM service:  
+    `sudo systemctl restart php8.4-fpm`
 
-> [!TIP]   
-> If running external Unit3d-Announce, restart the supervisor services.  
+- Restart the Laravel queues:  
+    `sudo php artisan queue:restart`  
 
-```sh
-sudo supervisorctl reread && \
-sudo supervisorctl update && \
-sudo supervisorctl reload
-```
+- Bring the site live:  
+    `sudo php artisan up`
+
+  
+- If running external Unit3d-Announce, restart the supervisor services.  
+
+    ```sh
+    sudo supervisorctl reread && \
+    sudo supervisorctl update && \
+    sudo supervisorctl reload
+    ```
