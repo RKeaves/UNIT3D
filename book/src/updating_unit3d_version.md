@@ -1,22 +1,22 @@
-# Updating UNIT3D
+# Updating UNIT3D  
 
 Update UNIT3D to the latest version by reviewing the release notes and following the steps below:
 
-## 1. Create Backup
+## 1. Create Backup  
 
 UNIT3D offers built-in backups. Refer to the Backups documentation for usage.
 
 > [!IMPORTANT]   
 > Ensure you have a complete backup before proceeding.
 
-## 2. Enter Maintenance Mode
+## 2. Enter Maintenance Mode  
 
 ```bash
 cd /var/www/html
 php artisan down
 ```
 
-## 3. Update UNIT3D
+## 3. Update UNIT3D  
 
 > **Note:** Before running the update, ensure your environment meets the new release’s minimum requirements.
 
@@ -46,77 +46,93 @@ php artisan down
         [============================] (Done!)
     ````
 
-3. **Run new migrations**
+3. **Run new migrations**  
    
     ````bash
         Run new migrations (php artisan migrate) (yes/no) [yes]:
         > yes
     ````
 
-4. **Install new packages**
+4. **Install new packages**  
    
     ````bash
         Install new packages (composer install) (yes/no) [yes]:
         > yes
     ````    
 
-5. **Compile assets**
+5. **Compile assets**  
    
     ````bash
         Compile assets (bun run build) (yes/no) [yes]:
         > yes        
     ````    
 
-## 4. Resume Site Functionality
+## 4. Resume Site Functionality  
 
-On a successful update process; clear the cache, restart the PHP-FPM service, restart the Laravel queues, and finally bring the site live. 
+After the update completes, run each of the following:
 
-```sh
-sudo php artisan set:all_cache && \
-sudo systemctl restart php8.4-fpm && \
-sudo php artisan queue:restart && \
-sudo php artisan up
-```
+1. **Clear all caches**  
 
-## Troubleshooting Clean-up
+   ```bash
+   sudo php artisan set:all_cache
+   ```
+
+2. **Restart PHP-FPM**  
+
+   ```bash
+   sudo systemctl restart php8.4-fpm
+   ```
+
+3. **Restart Laravel queues**  
+   
+   ```bash
+   sudo php artisan queue:restart
+   ```
+   
+## Troubleshooting Clean-up  
 
 Migration-related failures can occur during the update. It is important to review the error being described and make changes accordingly to clear any issues with the data at hand. 
 
 The below list of commands to finish a complete update process:
 
 - Finish any migrations not completed:  
-    `sudo php artisan migrate`
+
+  ```bash
+  sudo php artisan migrate
+  ```
 
 - Reinstall dependencies:  
-    `sudo -u www-data composer install --prefer-dist --no-dev -o`  
 
+  ```bash
+  sudo -u www-data composer install --prefer-dist --no-dev -o
+  ```
 - Clear caches:  
 
-    ```sh
-    sudo php artisan cache:clear  && \
-    sudo php artisan queue:clear  && \
-    sudo php artisan auto:email-blacklist-update && \
-    sudo php artisan auto:cache_random_media && \
-    sudo php artisan set:all_cache  
-    ```
+  ```sh
+  sudo php artisan cache:clear  && \
+  sudo php artisan queue:clear  && \
+  sudo php artisan auto:email-blacklist-update && \
+  sudo php artisan auto:cache_random_media && \
+  sudo php artisan set:all_cache
+  ```
 
 - Rebuild static assets:  
-    `bun install && bun run build`  
 
-- Restart the PHP-FPM service:  
-    `sudo systemctl restart php8.4-fpm`
+  ```bash
+  bun install && bun run build
+  ```
 
-- Restart the Laravel queues:  
-    `sudo php artisan queue:restart`  
-
-- Bring the site live:  
-    `sudo php artisan up`
-
+- Restart services:  
+  ```bash
+  sudo systemctl restart php8.4-fpm
+  sudo php artisan queue:restart
+  sudo php artisan up
+  ```
   
 - If running external Unit3d-Announce, restart the supervisor services.  
 
-    ```sh
-    sudo supervisorctl reread && \
-    sudo supervisorctl update && \
-    sudo supervisorctl reload
-    ```
+  ```sh
+  sudo supervisorctl reread && \
+  sudo supervisorctl update && \
+  sudo supervisorctl reload
+  ```
