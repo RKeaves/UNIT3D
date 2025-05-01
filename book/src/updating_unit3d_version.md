@@ -18,17 +18,25 @@ php artisan down
 
 ## 3. Update UNIT3D
 
-> **Note:** Before running the actual update, make sure your environment meets the new release’s minimum requirements.
+> **Note:** Before running the update, ensure your environment meets the new release’s minimum requirements.
 
 1. **Fetch and apply updates**  
+- The updater will fetch the latest commits from the upstream repository and stage them for installation.
+    
    ```bash
    cd /var/www/html
    php artisan git:update
    ```
+- You may be prompted to confirm each step; choose **yes** to overwrite with the new version.  
+
+    ````bash
+        Start the update process (yes/no) [yes]:
+        > yes
+    ````
 
 2. **Review and resolve conflicts**  
 
-   UNIT3D fetches the new code and prompts for action on file conflicts. It is suggested to accept the updated files. After the update, review `~/tempBackup/updateLogs.txt` for conflicts. Any modifications will need to be re-implemented with the new code.     
+- Pulls upstream commits and prompts for each file change; respond “yes” to overwrite your local copy.  
 
     ````bash
         Update config/unit3d.php (yes/no) [yes]:
@@ -41,11 +49,14 @@ php artisan down
         > yes
     ````
 
-3. **Run new migrations**  
-   ```bash
-   php artisan migrate
-   ```
+- After the update, review `~/tempBackup/updateLogs.txt` for conflicts. Any modifications will need to be re-implemented with the new code.  
 
+3. **Run new migrations**
+   
+    ````bash
+        Run new migrations (php artisan migrate) (yes/no) [yes]:
+        > yes
+    ````
 
 ## 4. Resume Site Functionality
 
