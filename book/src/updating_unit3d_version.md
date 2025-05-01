@@ -70,7 +70,7 @@ sudo supervisorctl reload
 
 ## Troubleshooting Clean-up
 
-During the update, an error related to a migration is a common occurance. It is important to review the error being described and make changes accordingly to clear any issues with the data at hand. 
+Migration-related failures can occur during the update. It is important to review the error being described and make changes accordingly to clear any issues with the data at hand. 
 
 The below list of commands to finish a complete update process:
 
