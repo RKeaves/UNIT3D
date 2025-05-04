@@ -1,144 +1,119 @@
-# Updating UNIT3D  
+# Updating UNIT3D
 
 Update UNIT3D to the latest version by reviewing the release notes and following the steps below:
 
-## 1. Create Backup  
+## 1. Create Backup:
 
-UNIT3D offers built-in backups. Refer to the Backups documentation for usage.
+UNIT3D offers built-in backups. Refer to the [Backups documentation](/book/src/backups.md) for usage.
 
-> [!IMPORTANT]   
+> [!IMPORTANT]
 > Ensure there is a complete backup before proceeding.
 
-## 2. Enter Maintenance Mode  
+## 2. Enter Maintenance Mode:
 
-```sh
+```bash
 cd /var/www/html
 php artisan down
 ```
 
-## 3. Update UNIT3D  
+## 3. Update UNIT3D:
 
-> **Note:** Before running the update, review the new release’s minimum requirements to ensure the environment meets them.
+> [!NOTE]
+> Before running the update, review the new release’s minimum requirements to ensure the environment meets them.
 
 1. **Proceed to update:**  
-- The updater will fetch the latest commits from the upstream repository and stage them for installation.
-    
-   ```sh
+
+   The updater will fetch the latest commits from the upstream repository and stage them for installation.
+
+   ```bash
    cd /var/www/html
    php artisan git:update
    ```
-- There will be a prompt to confirm each step; choose **yes** to overwrite with the new version. 
 
-    ````sh
-        Start the update process (yes/no) [yes]:
-        > yes
-    ````
+   There will be a prompt to confirm each step; choose `yes` to overwrite with the new version.
 
-2. **Accept upstream files**  
-
-- When prompted for each changed file, type yes to overwrite the local copy or press enter to accept the default answer shown in brackets.  
-
-    ````sh
-        Update config/unit3d.php (yes/no) [yes]:
-        > yes
-
-        git checkout origin/master -- config/unit3d.php
-        [============================] (Done!)
-    ````
-
-3. **Run new migrations**  
-   
-    ````sh
-        Run new migrations (php artisan migrate) (yes/no) [yes]:
-        > yes
-    ````
-
-4. **Install new packages**  
-   
-    ````sh
-        Install new packages (composer install) (yes/no) [yes]:
-        > yes
-    ````    
-
-5. **Compile assets**  
-   
-    ````sh
-        Compile assets (bun run build) (yes/no) [yes]:
-        > yes        
-    ````    
-
-## 4. Resume Site Functionality  
-
-After the update completes, run each of the following:
-
-1. **Clear all caches**  
-
-   ```sh
-   sudo php artisan set:all_cache
+   ```bash
+   Start the update process (yes/no) [yes]:
+   > yes
    ```
 
-2. **Restart PHP-FPM**  
+2. **Accept upstream files:**  
 
-   ```sh
-   sudo systemctl restart php8.4-fpm
+   When prompted for each changed file, type `yes` to overwrite the local copy or press `Enter` to accept the default shown in brackets.
+
+   ```bash
+   Update config/unit3d.php (yes/no) [yes]:
+   > yes
+
+   git checkout origin/master -- config/unit3d.php
+   [============================] (Done!)
    ```
 
-3. **Restart Laravel queues**  
-   
-   ```sh
-   sudo php artisan queue:restart
+3. **Run new migrations:**
+
+   ```bash
+   Run new migrations (php artisan migrate) (yes/no) [yes]:
+   > yes
    ```
-   
-4. **Bring the site live**
 
-    ```sh
-    sudo php artisan up
-    ```
+4. **Install new packages:**
 
-## Troubleshooting Clean-up  
+   ```bash
+   Install new packages (composer install) (yes/no) [yes]:
+   > yes
+   ```
 
-Migration-related failures can occur during the update. It is important to review the error being described and make changes accordingly to clear any issues with the data at hand. 
+5. **Compile assets:**
 
-The below list of commands to finish a complete update process:
+   ```bash
+   Compile assets (bun run build) (yes/no) [yes]:
+   > yes
+   ```
 
-- Finish any migrations not completed:  
+## Troubleshooting Clean-up:
 
-  ```sh
-  sudo php artisan migrate
-  ```
+The following commands are **optional** and should be run only as needed to resolve specific errors:
 
-- Reinstall dependencies:  
+- **Finish any migrations not completed:**
 
-  ```sh
-  composer install --prefer-dist --no-dev -o
-  ```
-- Clear caches:  
+```bash
+sudo php artisan migrate
+```
 
-  ```sh
-  sudo php artisan cache:clear  && \
-  sudo php artisan queue:clear  && \
-  sudo php artisan auto:email-blacklist-update && \
-  sudo php artisan auto:cache_random_media && \
-  sudo php artisan set:all_cache
-  ```
+- **Reinstall dependencies:**
 
-- Rebuild static assets:  
+```bash
+composer install --prefer-dist --no-dev -o
+```
 
-  ```sh
-  sudo bun install && sudo bun run build
-  ```
+- **Clear caches:**
 
-- Restart services:  
-  ```sh
-  sudo systemctl restart php8.4-fpm
-  sudo php artisan queue:restart
-  sudo php artisan up
-  ```
-  
-- If running external Unit3d-Announce, restart the supervisor services.  
+```bash
+sudo php artisan cache:clear && \
+sudo php artisan queue:clear && \
+sudo php artisan auto:email-blacklist-update && \
+sudo php artisan auto:cache_random_media && \
+sudo php artisan set:all_cache
+```
 
-  ```sh
-  sudo supervisorctl reread && \
-  sudo supervisorctl update && \
-  sudo supervisorctl reload
-  ```
+- **Rebuild static assets:**
+
+```bash
+sudo bun install && sudo bun run build
+```
+
+- **Restart services:**
+
+```bash
+sudo systemctl restart php8.4-fpm && \
+sudo php artisan queue:restart && \
+sudo php artisan up
+```
+
+- **If running external UNIT3D-Announce, restart the supervisor services:**
+
+```bash
+sudo supervisorctl reread && \
+sudo supervisorctl update && \
+sudo supervisorctl reload
+```
