@@ -3,7 +3,7 @@ name: Deploy Book
 on:
   push:
     branches:
-      - updating-unit3d-draft
+      - master
 
 jobs:
     deploy-book:
