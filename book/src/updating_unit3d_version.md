@@ -2,14 +2,14 @@
 
 Update UNIT3D to the latest version by reviewing the release notes and following the steps below:
 
-## 1. Create Backup
+## 1. Create backup
 
 UNIT3D offers built-in backups. Refer to the [Backups documentation](/book/src/backups.md) for usage.
 
 > [!IMPORTANT]
 > Ensure there is a complete backup before proceeding.
 
-## 2. Enter Maintenance Mode
+## 2. Enter maintenance mode
 
 ```bash
 cd /var/www/html
@@ -19,14 +19,14 @@ php artisan down
 ## 3. Update UNIT3D
 
 <video controls width="640" height="360">
-  <source src="update_unit3d.webm" type="video/webm">
+  <source src="/book/assets/update_unit3d.webm" type="video/webm">
   Your browser does not support the video tag.
 </video>
 
 > [!NOTE]
 > Before running the update, review the new release’s minimum requirements to ensure the environment meets them.
 
-1. **Proceed to update:**
+1. **Proceed to update:**  
 
    The updater will fetch the latest commits from the upstream repository and stage them for installation.
 
@@ -42,7 +42,7 @@ php artisan down
    > yes
    ```
 
-2. **Accept upstream files:**
+2. **Accept upstream files:**  
 
    When prompted for each changed file, type `yes` to overwrite the local copy or press `Enter` to accept the default shown in brackets.
 
@@ -75,7 +75,7 @@ php artisan down
    > yes
    ```
 
-## Troubleshooting Clean-up
+## Troubleshooting clean-up
 
 The following commands are **optional** and should be run only as needed to resolve specific errors:
 
