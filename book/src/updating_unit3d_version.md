@@ -26,7 +26,7 @@ php artisan down
 > [!NOTE]
 > Before running the update, review the new release’s minimum requirements to ensure the environment meets them.
 
-1. **Proceed to update:**  
+1. **Proceed to update:**
 
    The updater will fetch the latest commits from the upstream repository and stage them for installation.
 
@@ -42,7 +42,7 @@ php artisan down
    > yes
    ```
 
-2. **Accept upstream files:**  
+2. **Accept upstream files:**
 
    When prompted for each changed file, type `yes` to overwrite the local copy or press `Enter` to accept the default shown in brackets.
 
