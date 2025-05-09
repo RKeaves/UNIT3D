@@ -7,21 +7,6 @@ _Set up the UNIT3D Announce._
 > [!IMPORTANT]
 > **Before starting, ensure you have created and securely stored a backup of your current installation.**
 
-## Table of Contents
-
-- [Prerequisites](#prerequisites)  
-- [Installation Steps](#installation-steps)  
-  - [1. Prepare the Environment](#1-prepare-the-environment)  
-  - [2. Clone & Configure UNIT3D-Announce](#2-clone--configure-unit3d-announce)  
-  - [3. Build the Tracker](#3-build-the-tracker)  
-  - [4. Update UNIT3D Environment](#4-update-unit3d-environment)  
-  - [5. Configure Nginx & Supervisor](#5-configure-nginx--supervisor)  
-  - [6. Finalize & Verify Setup](#6-finalize--verify-setup)  
-- [Troubleshooting](#troubleshooting)  
-- [Acknowledgements](#acknowledgements)  
-
----
-
 ## Prerequisites
 
 - An existing UNIT3D installation (typically at `/var/www/html`).  
