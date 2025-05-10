@@ -5,6 +5,6 @@
 
 Refer to the upstream documentation  for configuration and usage details.
 
-- **Consult** project’s [README](https://github.com/Roardom/UNIT3D-Announce/blob/main/README.md) for installation and usage instructions.
+- **Consult** the [README](https://github.com/Roardom/UNIT3D-Announce/blob/main/README.md) for installation and usage instructions.
 
 - **Review** the [`.env.example`](https://github.com/Roardom/UNIT3D-Announce/blob/main/.env.example) to configure required variables.
