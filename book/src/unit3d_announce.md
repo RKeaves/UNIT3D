@@ -1,7 +1,9 @@
 # UNIT3D-Announce
 
+Optional announce service for UNIT3D reduces CPU usage on high-volume trackers exceeding 1 million peers.
+
 > [!TIP]
-> Offer a dedicated BitTorrent announce service designed for UNIT3D.
+> Enable only when extra performance is needed. The default announce suffices otherwise.
 
 Refer to the upstream documentation  for configuration and usage details.
 
