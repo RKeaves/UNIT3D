@@ -89,6 +89,6 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         View::composer('partials.footer', FooterComposer::class);
-        View::composer('partials.top_nav', TopNavComposer::class);
+        View::composer('partials.top-nav', TopNavComposer::class);
     }
 }

@@ -19,7 +19,7 @@
     </li>
 @endsection
 
-@section('page', 'page__playlist-category--edit')
+@section('page', 'page__staff-playlist-category--edit')
 
 @section('main')
     <section class="panelV2">

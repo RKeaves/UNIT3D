@@ -9,7 +9,7 @@
     <li class="breadcrumb--active">Playlist Categories</li>
 @endsection
 
-@section('page', 'page__category--index')
+@section('page', 'page__staff-playlist-category--index')
 
 @section('main')
     <section class="panelV2">

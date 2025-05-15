@@ -530,7 +530,7 @@ return [
             'self' => true,
 
             'schemes' => [
-                // 'data:',
+                'data:',
                 'https:',
             ],
 

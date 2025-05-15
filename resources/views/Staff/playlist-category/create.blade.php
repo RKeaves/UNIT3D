@@ -16,7 +16,7 @@
     </li>
 @endsection
 
-@section('page', 'page__playlist-category--create')
+@section('page', 'page__staff-playlist-category--create')
 
 @section('main')
     <section class="panelV2">

@@ -6,20 +6,20 @@ UNIT3D offers built in backup tools, available through the web dashboard or via 
 
  **Customize** `config/backup.php` in your editor and adjust settings as needed; inline notes outline the available configuration parameters.
 
- **Key structure**:  
+ **Key structure**:
 
-- **`backup`**  
+- **`backup`**
 
-    - **`name`**   
+    - **`name`**
 
-    - **`source`**   
-        - **`files`**  
+    - **`source`**
+        - **`files`**
 
             Specifies which directories and files to `include` and which to `exclude` in the backup.
 
             ```php
                 'include' => [
-                    base_path(),           
+                    base_path(),
                  ],
 
                 'exclude' => [
@@ -27,47 +27,47 @@ UNIT3D offers built in backup tools, available through the web dashboard or via 
                     base_path('vendor'),
                     base_path('node_modules'),
                     base_path('storage'),
-                    base_path('public/vendor/joypixels'), 
+                    base_path('public/vendor/joypixels'),
                  ],
-            ```       
+            ```
 
-           - **`follow_links`** 
+           - **`follow_links`**
 
-           - **`ignore_unreadable_directories`** 
+           - **`ignore_unreadable_directories`**
 
-           - **`relative_path`** 
+           - **`relative_path`**
 
-        - **`databases`**  
+        - **`databases`**
 
             Specifies the database connections to back up.
 
-    - **`database_dump_compressor`**  
+    - **`database_dump_compressor`**
 
          Compressor class (e.g. `Spatie\DbDumper\Compressors\GzipCompressor::class`) or `null` to disable.
 
-    - **`destination`**  
+    - **`destination`**
 
          Defines the storage location for backup files.​
 
-    - **`temporary_directory`**  
+    - **`temporary_directory`**
 
      Staging directory for temporary files.
 
-- **`notifications`**  
+- **`notifications`**
 
-    Define when and how backup events trigger alerts via mail, Slack, or custom channels. 
+    Define when and how backup events trigger alerts via mail, Slack, or custom channels.
 
-- **`monitor_backups`**  
+- **`monitor_backups`**
 
-    Detect backup issues; triggers `UnhealthyBackupWasFound` when needed.  
+    Detect backup issues; triggers `UnhealthyBackupWasFound` when needed.
 
-- **`cleanup`**  
+- **`cleanup`**
 
-    Define how long to keep backups and when to purge old archives. 
+    Define how long to keep backups and when to purge old archives.
 
-    - **`strategy`**  
+    - **`strategy`**
 
-    - **`default_strategy`**  
+    - **`default_strategy`**
 
          Keeps all backups for 7 days; then retains daily backups for 16 days, weekly for 8 weeks, monthly for 4 months, and yearly for 2 years. Deletes old backups exceeding 5000 MB.
 
@@ -80,23 +80,23 @@ UNIT3D offers built in backup tools, available through the web dashboard or via 
              'delete_oldest_backups_when_using_more_megabytes_than' => 5000,
          ```
 
-- **`security`**  
+- **`security`**
 
     Ensure that only someone with your `APP_KEY` can decrypt and restore snapshots.
 
-## 2. Create a Backup
+## 2. Create a backup
 
 You can access the built-in Backups dashboard from the Staff menu. It shows each backup’s status, health, size, and count, and lets administrators launch unscheduled full, database, or files-only backups instantly. Another approach is to use the command line.
 
-> [!IMPORTANT]  
-> Backups initiated via the Staff Dashboard buttons may timeout on very large installations. 
+> [!IMPORTANT]
+> Backups initiated via the Staff Dashboard buttons may timeout on very large installations.
 
-- The following artisan commands are available: 
+- The following artisan commands are available:
 
    ```sh
    php artisan backup:run
    ```
-   
+
    Creates a timestamped ZIP of application files and database.
 
    ```sh
@@ -112,7 +112,7 @@ You can access the built-in Backups dashboard from the Staff menu. It shows each
    Creates a timestamped ZIP containing only application files.
 
 
-## 3. Viewing Backup List
+## 3. Viewing backup list
 
 - **List** existing backups:
 
@@ -121,10 +121,10 @@ You can access the built-in Backups dashboard from the Staff menu. It shows each
    ```
 
 
-## 4. Restoring a Backup
+## 4. Restoring a backup
 
-> [!WARNING]  
-> **Always test backup restoration procedures on a non‑critical environment before applying to production.**  
+> [!WARNING]
+> **Always test backup restoration procedures on a non‑critical environment before applying to production.**
 > Incorrect restoration can lead to data loss or service disruption.
 
 1. **Install prerequisites** (Debian/Ubuntu):
@@ -181,7 +181,7 @@ You can access the built-in Backups dashboard from the Staff menu. It shows each
 2. **Restore** your database:
 
    ```sh
-   mysql -u unit3d -p unit3d < ~/tempBackup/db-dumps/mysql-unit3d.sql 
+   mysql -u unit3d -p unit3d < ~/tempBackup/db-dumps/mysql-unit3d.sql
    ```
 
 ## 5. Reset & Cleanup

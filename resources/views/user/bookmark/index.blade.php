@@ -17,7 +17,7 @@
     </li>
 @endsection
 
-@section('page', 'page__user-bookmarks--index')
+@section('page', 'page__user-bookmark--index')
 
 @section('nav-tabs')
     @include('user.buttons.user')

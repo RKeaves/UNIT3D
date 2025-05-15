@@ -23,7 +23,7 @@
         </a>
     @endif
     <div class="playlists__playlist-author">
-        <x-user_tag :user="$playlist->user" :anon="false" />
+        <x-user-tag :user="$playlist->user" :anon="false" />
     </div>
     <a
         class="playlists__playlist-link"

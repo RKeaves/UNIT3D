@@ -396,7 +396,7 @@ class SimilarTorrent extends Component
             ->where('category_id', '=', $this->category->id)
             ->when(
                 $this->hideFilledRequests,
-                fn ($query) => $query->where(fn ($query) => $query->whereDoesntHave('torrent')->orWhereDoesntHave('approver'))
+                fn ($query) => $query->where(fn ($query) => $query->whereNull('torrent_id')->orWhereNull('approved_when'))
             )
             ->latest()
             ->get();

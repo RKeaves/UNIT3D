@@ -34,7 +34,7 @@ class YearlyOverviewController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
-        return view('stats.yearly_overviews.index', [
+        return view('stats.yearly-overviews.index', [
             'siteYears' => range(now()->subYear()->year, Carbon::parse(config('other.birthdate'))->year),
         ]);
     }
@@ -50,7 +50,7 @@ class YearlyOverviewController extends Controller
 
         abort_unless($birthYear <= $year && $year < $currentYear, 404);
 
-        return view('stats.yearly_overviews.show', [
+        return view('stats.yearly-overviews.show', [
             'topMovies' => cache()->rememberForever(
                 'yearly-overview:'.$year.':top-movies',
                 fn () => Torrent::with('movie')

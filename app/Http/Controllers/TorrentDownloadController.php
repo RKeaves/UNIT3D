@@ -32,7 +32,7 @@ class TorrentDownloadController extends Controller
      */
     public function show(Request $request, int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return view('torrent.download_check', [
+        return view('torrent.download-check', [
             'torrent' => Torrent::withoutGlobalScope(ApprovedScope::class)->findOrFail($id),
             'user'    => $request->user(),
         ]);

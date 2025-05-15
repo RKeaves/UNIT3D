@@ -27,7 +27,7 @@ class CheatedTorrentController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return view('Staff.cheated_torrent.index', [
+        return view('Staff.cheated-torrent.index', [
             'torrents' => Torrent::query()
                 ->select([
                     'torrents.id',
