@@ -9,6 +9,7 @@
 - [Server Management](server_management.md)
 - [Sharing Source Code](sharing_source_code.md)
 - [Torrent API](torrent_api.md)
+- [Translations](translations.md)
 - [Updating Unit3d Version](updating_unit3d_version.md)
 - [Upgrading PHP Version](upgrading_php_version.md)
 - [UNIT3D-Announce](unit3d_announce.md)

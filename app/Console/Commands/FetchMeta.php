@@ -68,8 +68,13 @@ class FetchMeta extends Command
 
         foreach ($tmdbMovieIds as $id) {
             usleep(250_000);
-            ProcessMovieJob::dispatchSync($id);
-            $this->info("Movie metadata fetched for tmdb {$id}");
+
+            try {
+                ProcessMovieJob::dispatchSync($id);
+                $this->info("Movie metadata fetched for tmdb {$id}");
+            } catch (Exception $e) {
+                $this->warn("Movie metadata fetch failed for tmdb {$id}: ".$e->getMessage());
+            }
         }
 
         $this->info('Querying all tmdb tv ids');
@@ -85,8 +90,13 @@ class FetchMeta extends Command
 
         foreach ($tmdbTvIds as $id) {
             usleep(250_000);
-            ProcessTvJob::dispatchSync($id);
-            $this->info("TV metadata fetched for tmdb {$id}");
+
+            try {
+                ProcessTvJob::dispatchSync($id);
+                $this->info("TV metadata fetched for tmdb {$id}");
+            } catch (Exception $e) {
+                $this->warn("TV metadata fetch failed for tmdb {$id}: ".$e->getMessage());
+            }
         }
 
         $this->info('Querying all igdb game ids');
@@ -102,8 +112,13 @@ class FetchMeta extends Command
 
         foreach ($igdbGameIds as $id) {
             usleep(250_000);
-            ProcessIgdbGameJob::dispatchSync($id);
-            $this->info("Game metadata fetched for igdb {$id}");
+
+            try {
+                ProcessIgdbGameJob::dispatchSync($id);
+                $this->info("Game metadata fetched for igdb {$id}");
+            } catch (Exception $e) {
+                $this->warn("Game metadata fetch failed for igdb {$id}: ".$e->getMessage());
+            }
         }
 
         $this->alert('Meta fetch queueing complete in '.now()->floatDiffInSeconds($start).'s.');
